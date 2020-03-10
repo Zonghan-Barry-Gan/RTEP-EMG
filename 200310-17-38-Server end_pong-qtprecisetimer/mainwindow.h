@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QUdpSocket>
+#include <QElapsedTimer>
 
 class QGraphicsItem;
 class QTimer;
@@ -33,6 +34,7 @@ public:
     QGraphicsRectItem *iP2, *iP1;
     QGraphicsEllipseItem *iBall;
     QTimer *iTimer;
+    QElapsedTimer timer_measure;
 
     QPointF iBallMotion;
     qreal iP2Motion;

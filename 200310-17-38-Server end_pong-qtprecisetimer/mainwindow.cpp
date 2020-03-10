@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 
+
 #include <QPen>
 #include <QResizeEvent>
 #include <QDebug>
@@ -42,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
     iTimer->start();
     QObject::connect(iTimer, SIGNAL(timeout()), this, SLOT(Position()));
 
+    //measure timer accuracy
+    QElapsedTimer time_measure;
+    timer_measure=time_measure;
 
     iScene->setSceneRect(0, 0, 350, 320);
     iScene->addItem(iP2);
@@ -105,6 +109,7 @@ void MainWindow::refreshScore(int count)
 
 void MainWindow::Position()
 {
+    qDebug()<<timer_measure.elapsed();
     qreal Xprime = iBall->pos().x() + iBallMotion.x();
     qreal Yprime = iBall->pos().y() + iBallMotion.y();
 
