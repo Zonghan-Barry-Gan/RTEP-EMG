@@ -1,0 +1,100 @@
+#include "window.h"
+// #include "adcreader.h"
+
+#include <cmath>  // for sine stuff
+
+
+
+#include <unistd.h>
+
+// includes the 2nd order IIR filter
+
+
+Window::Window() : count(0)
+{
+	// set up the initial plot data
+	for( int index=0; index<plotDataSize; ++index )
+	{
+		xData[index] = index;
+		yData[index] =  sin( M_PI * index/50 );
+	}
+
+    curve1 = new QwtPlotCurve;
+    curve2 = new QwtPlotCurve;
+    curve3 = new QwtPlotCurve;
+    curve4 = new QwtPlotCurve;
+    
+    plot1 = new QwtPlot;
+    plot2 = new QwtPlot;
+    plot3 = new QwtPlot;
+    plot4 = new QwtPlot;
+	// make a plot curve from the data and attach it to the plot
+    
+
+    curve1->setSamples(xData, yData, plotDataSize);
+    curve1->attach(plot1);
+    curve2->setSamples(xData, yData, plotDataSize);
+    curve2->attach(plot2);
+    curve3->setSamples(xData, yData, plotDataSize);
+    curve3->attach(plot3);
+    curve4->setSamples(xData, yData, plotDataSize);
+    curve4->attach(plot4);
+
+    plot1->replot();
+    plot1->show();
+    plot2->replot();
+    plot2->show();
+    plot3->replot();
+    plot3->show();
+    plot4->replot();
+    plot4->show();
+
+
+    vLayout1 = new QVBoxLayout;
+    vLayout1->addLayout(vLayout1);
+
+    vLayout1->addWidget(plot1);
+    vLayout1->addWidget(plot2);
+    vLayout1->addWidget(plot3);
+    vLayout1->addWidget(plot4);
+
+	setLayout(vLayout1);
+
+    ads.setGain(adsGain_t::GAIN_EIGHT);
+    ads.begin();
+}
+
+
+
+
+}
+void Window::timerEvent( QTimerEvent * )
+{
+    adc0 = ads.readADC_SingleEnded(0);
+    //printBits(sizeof(adc0), &adc0);
+    usleep(1);
+    
+    	double inVal = adc0;
+	++count;
+
+	// add the new input to the plot
+	memmove( yData, yData+1, (plotDataSize-1) * sizeof(double) );
+	yData[plotDataSize-1] = inVal;
+	curve1->setSamples(xData, yData, plotDataSize);
+	plot1->replot();
+
+
+    curve1->setSamples(xData, yData, plotDataSize);
+    curve2->setSamples(xData, yData, plotDataSize);
+    curve3->setSamples(xData, yData, plotDataSize);
+    curve4->setSamples(xData, yData, plotDataSize);
+
+    plot1->replot();
+    plot2->replot();
+    plot3->replot();
+    plot4->replot();
+
+
+
+
+}
