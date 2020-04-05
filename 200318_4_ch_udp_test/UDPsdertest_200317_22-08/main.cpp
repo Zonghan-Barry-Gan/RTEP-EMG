@@ -20,21 +20,21 @@ int main(int argc, char *argv[])
         qDebug()<<"sender sc bind sucess";
     float dt = 20.0;
     QByteArray msg;
-    for(int i=0; i<4; i++){
+    for(int i=0; i<10000; i++){
         // float[] transform to QByteArray
         float  fVar[4] = { 1.1, 2.3, 9.5, 0.2 };//initialize to-be-sent dataset
 
 // transforming float into qbytearray
         int len_fVar = sizeof(fVar); // 4*4 = 16 bit
-        msg.resize(len_fVar);
-        memcpy(msg.data(), &fVar, len_fVar);
+//        msg.resize(len_fVar);
+//        memcpy(msg.data(), &fVar, len_fVar);
 
         qDebug() << "--- Sending";
-        qDebug() << "data: " << msg;
+//        qDebug() << "data: " << msg;
 
         //send and check
 //        bool cksd = sdersc.writeDatagram(msg, QHostAddress("192.168.43.30"), rscverprt);
-        bool cksd = sdersc.writeDatagram(msg, QHostAddress("127.0.0.1"), rscverprt);
+        bool cksd = sdersc.writeDatagram((char*)fVar,len_fVar,QHostAddress("127.0.0.1"), rscverprt);
 
         if(cksd>0)
             qDebug()<<"successfully send";
@@ -50,5 +50,6 @@ int main(int argc, char *argv[])
         }
     return a.exec();
 }
+
 
 // inspired by https://blog.csdn.net/weixin_42216430/article/details/80780297

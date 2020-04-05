@@ -1,0 +1,158 @@
+[33mcommit 80bea7981429ff03365a21dcbaeaa00132c2471e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 16:47:32 2020 +0000
+
+    16-46 Unit test of GPIO listening
+    
+    This unit test listen to GPIO23, for rising edge
+
+[33mcommit d8e8a32f4769b0e6f5bd62f08e0f5d76acd964f4[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:39:21 2020 +0000
+
+    Delete 200225 18-00UdpReceiver.cpp
+
+[33mcommit 9b6229f4975d816ceeb706d408e2f54dde305b04[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:39:07 2020 +0000
+
+    Delete 200225 11-45 UdpReceiver.cpp
+
+[33mcommit fd36fd2401e6d451798f5cdec2acb5a9a9f04097[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:37:48 2020 +0000
+
+    Delete 200225 18-00 main for real float data.cpp
+
+[33mcommit 4c2c67102cb3feaef5aa55ca5d5de728e020d11e[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:37:33 2020 +0000
+
+    Delete 200225 11-45 main.cpp
+
+[33mcommit 02ad153eb3d8550d62f2952e3cc8d9d2309b4539[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:34:38 2020 +0000
+
+    Add files via upload
+
+[33mcommit 9f9250476f17206f15eb739a85aa82139e946a62[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 18 10:33:16 2020 +0000
+
+    10-32 test demo for 4 ch udp sending and receiving
+
+[33mcommit 5909f136129534f403bfe67bb91d5c20059cbae9[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 11 10:15:25 2020 +0000
+
+    200311 HENRY AND FINLAY'S CURRENT ADC CODE
+
+[33mcommit dca3658c3d18d561985f799fce2c0027e8d6e8e6[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Wed Mar 11 10:11:53 2020 +0000
+
+    Create .keep
+
+[33mcommit 7464eef6c4aba3a86402f1875372b1df0cee1c37[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Tue Mar 10 18:53:54 2020 +0000
+
+    200310-19-30 srvr end faster rsv bsd with ll slot
+    
+    To make the thread delay smaller with event base (qt signal-slot), the main slot (pong gaming) is spit in several parallel slot triggered by rsv event. The main slot currently only works for move the ball, which is very fast and even executed twice in 1 ms as long as the sig is fired fast enough. all the direction counting, bouncing and scoring are in ll slot
+
+[33mcommit 57c38bb37ba3374cbd059b94dbd0d7c31cab9311[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Tue Mar 10 18:42:22 2020 +0000
+
+    200310-19-00 srvr end based on rs evt instd timer
+    
+    As we gonna put srvr end on Android, we can't use the qtimer. not even the qprecisetimer. System API timer can't be used as well. The reason is that android is less "real-time" than linux --- the android sys reflash usually every 5ms.
+    Yet we can make the motion based on receiving the signal. the signal sent from the Raspberry PI is real-timed by the pi
+
+[33mcommit a02ea5cd523a9c9dc69a2d12a5f811a02aa19efd[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Tue Mar 10 18:15:28 2020 +0000
+
+    200310 18-14 add verification measure the qprecise timer
+    
+    the time interval of the precise timer is measured using qelapsedtimer
+
+[33mcommit d2a41cba2d2f11d358ee5e068db1e79ffbe64516[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Tue Mar 10 18:00:05 2020 +0000
+
+    200310-17-55 pong refresch with qt precise timer
+    
+    To increase time accuracy. Find a way is to set  qtimer  type as precise timer which is announced by qt to keep a accuracy of 1ms. most importantly no error accumulation
+
+[33mcommit 5fb137daa158801d4b73c4977f68e18c33f3ec3b[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Tue Mar 10 17:23:09 2020 +0000
+
+    This attempt to replace qtimer with linux timer
+    
+    In this version, an attempt is made to replace the qtimer with accurate linux timer (set up by Dr. Bern Porr). The idea is to rewrite Bern's linux timer class in qobject and create a timeout() signal as in qtimer. So that the timmer event can be easily trigger motion of other class through signal (timeout()) to slot
+
+[33mcommit f323ba423cc85fec4c103918b6e6be059e1bbcd3[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Sun Mar 1 22:35:18 2020 +0000
+
+    UDP new log
+
+[33mcommit 20d3bea0111662bff0328d0bd003e4a6f3438d77[m[33m ([m[1;33mtag: 200301_01_34[m[33m)[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Sun Mar 1 01:27:51 2020 +0000
+
+    Pong game controlled by UDP
+    
+    This is an adaption of an opensource pong game but the whole game kernel is removed and rewrite to be controlled instead of the UDP sig instead of the key press
+
+[33mcommit 1162c612db80bc70219db8e58f48048177f9c03c[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 13:24:03 2020 +0000
+
+    Add files via upload
+
+[33mcommit 645fa83abfb4e7f3e6b9fff0871a78085849b528[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:26:32 2020 +0000
+
+    Add files via upload
+
+[33mcommit 1abd3a94f8e234c6b718b486b70bcf9e0d73335e[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:19:54 2020 +0000
+
+    Delete 200225 18-00 main for real float data.cpp
+
+[33mcommit e4295a9bc746a5120ca4948af3af8f566509b413[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:19:44 2020 +0000
+
+    Delete 200225 11-45 main.cpp
+
+[33mcommit 43840550f9da1fa73ddc547053efcf1892a6fbc6[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:19:28 2020 +0000
+
+    Delete 200225 11-45 UdpReceiver.cpp
+
+[33mcommit 01a707bf95a40e6e74319798f56bdf244db616e5[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:19:05 2020 +0000
+
+    Delete 200225 18-00UdpReceiver.cpp
+
+[33mcommit 466de11cab965882eae967dedc7f6fce146e7702[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:18:27 2020 +0000
+
+    Add files via upload
+
+[33mcommit e2c8dbb74294f57b4281149fc75bad1e61e4c292[m
+Author: Zonghan-Barry-Gan <54106564+Zonghan-Barry-Gan@users.noreply.github.com>
+Date:   Thu Feb 27 09:17:52 2020 +0000
+
+    Add files via upload
