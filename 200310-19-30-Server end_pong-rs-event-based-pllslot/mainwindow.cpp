@@ -17,7 +17,7 @@ MainWindow::MainWindow(int scrnwidth, int scrnheight, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     iScore ( 0 ),
-    iBallMotion ( -0.5, -0.5 ),
+    iBallMotion ( -2, -2 ),
     iP2Motion( 0 ),
     iP1Motion( 0 )
 {
@@ -47,7 +47,7 @@ MainWindow::MainWindow(int scrnwidth, int scrnheight, QWidget *parent) :
 //    QElapsedTimer time_measure;
 //    timer_measure=time_measure;
 
-    iScene->setSceneRect(0, 0, wdwidth * 0.8, wdheight * 0.8);
+    iScene->setSceneRect(0, 0, wdwidth * 0.95, wdheight * 0.8);
 
 
     //QSize m(iScene->sceneRect().size().width() + 10, iScene->sceneRect().size().height() + 10);
@@ -57,9 +57,9 @@ MainWindow::MainWindow(int scrnwidth, int scrnheight, QWidget *parent) :
 
 
     //iP2->setPos(135, 5);
-    iP2->setPos(wdwidth*0.37, wdheight*0.85);
+    iP2->setPos(wdwidth*0.37, wdheight*0.815);
     //(iScene->width() * 0.84, iScene->height() * 0.014); //green
-    iP1->setPos(wdwidth*0.37, -wdheight*0.035); //iScene->width() * 0.39, iScene->height() * 0.94); //blue
+    iP1->setPos(wdwidth*0.37, -wdheight*0.0375); //iScene->width() * 0.39, iScene->height() * 0.94); //blue
     iBall->setPos(iScene->width() * 0.50, iScene->height() * 0.50);
 
 
@@ -218,12 +218,12 @@ qreal MainWindow::CpuP1Motion()
     if ( iBall->pos().x() + iBallMotion.x() > iP1->sceneBoundingRect().right() )
     {
         // move right
-        dir = 5.0/6.0;
+        dir = 5.0;// /6.0;
     }
     else if ( iBall->pos().x() + iBallMotion.x() < iP1->sceneBoundingRect().left() )
     {
         // move left
-        dir = -5.0/6.0;
+        dir = -5.0 ;// /6.0;
     }
 
     return dir;
@@ -256,13 +256,13 @@ void MainWindow::receive()
 //calculate direction
         if (outval>10) /*emit P2isleft();*/
         {
-            iP2Motion = (iP2Motion == 0 ? -2 : 0);
+            iP2Motion = (iP2Motion == 0 ? -5 : 0);
             //qDebug()<<"move left";
         }
         else //if (outval<0)
         {
 //            emit P2isright();
-           iP2Motion  = (iP2Motion == 0 ? 2 : 0);
+           iP2Motion  = (iP2Motion == 0 ? 5 : 0);
             //qDebug()<<"move right";
         }
     this->rfshcount++;
