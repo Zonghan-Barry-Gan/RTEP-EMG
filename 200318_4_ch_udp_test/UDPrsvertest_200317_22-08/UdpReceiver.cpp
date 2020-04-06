@@ -48,10 +48,11 @@ void Udprsvertest::receive()
 
         //int len_fVar = sizeof(fVar); // 4*4 = 16 calculate the size
         rsverSocket->readDatagram((char*)outFval, sizeof(outFval));
+
 //        memcpy(&outFval, dtstrm.data(), len_fVar);
 
 
-        qDebug() << "data: " << outFval;
+        qDebug() << "data: " << outFval[0]<<outFval[1]<<outFval[2]<<outFval[3];
     }
 }
 

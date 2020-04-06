@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow
 
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(int scrnwidth, int scrnheight, QWidget *parent = 0);
     ~MainWindow();
     Ui::MainWindow *ui;
     Gameplay *iLoop;
@@ -41,20 +41,21 @@ public:
     qreal iP1Motion;
     qreal CpuP1Motion();
     //QUdpSocket *rsverSocket;
+    int rfshcount=0;
 public slots:
     void refreshScore(int count);
     void Position();
-    void Boundary();
-    void P2Moveleft();
-    void P2Moveright();
+//    void Boundary();
+//    void P2Moveleft();
+//    void P2Moveright();
 
 
 
 signals:
     void goal(int player);
-    void P2isleft();
-    void P2isright();
-
+//    void P2isleft();
+//    void P2isright();
+    void rfsh();
 
 //for udp receive
 public slots:
@@ -62,6 +63,10 @@ public slots:
 
 private:
     QUdpSocket *rsverSocket;
+    int wdwidth;
+    int wdheight;
+    int totalHeight = 350;
+    int totalWidth = 320;
 };
 
 #endif // MAINWINDOW_H

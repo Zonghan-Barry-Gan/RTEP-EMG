@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         //send and check
 //        bool cksd = sdersc.writeDatagram(msg, QHostAddress("192.168.43.30"), rscverprt);
         bool cksd = sdersc.writeDatagram((char*)fVar,len_fVar,QHostAddress("127.0.0.1"), rscverprt);
-
+        qDebug()<<fVar[0]<<fVar[2];
         if(cksd>0)
             qDebug()<<"successfully send";
         else
